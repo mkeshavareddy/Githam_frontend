@@ -4,6 +4,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+
 # Python
 __pycache__/
 *.py[cod]
@@ -117,9 +118,6 @@ public
 tmp/
 temp/
 
-# Docker
-.dockerignore
-
 # Database
 *.db
 *.sqlite
@@ -176,3 +174,4 @@ dmypy.json
 
 # Optional stylelint cache
 .stylelintcache
+.AI_policy_frontend\frontend\AI_MODELS_SETUP.md
