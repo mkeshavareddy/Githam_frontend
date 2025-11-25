@@ -215,9 +215,9 @@ export default function WebScraperPage() {
           </div>
           <div className="flex items-center gap-2">
             {scraperHealth && (
-              <Badge variant={scraperHealth.selenium_available ? "default" : "destructive"} className="text-sm">
+              <Badge variant={scraperHealth.status === 'unavailable' ? "destructive" : "default"} className="text-sm">
                 <Activity className="h-4 w-4 mr-2" />
-                {scraperHealth.selenium_available ? "Selenium Ready" : "Selenium Unavailable"}
+                {scraperHealth.status === 'unavailable' ? "Web Scraping Unavailable" : "Web Scraping Available"}
               </Badge>
             )}
             <Badge variant="outline" className="text-sm">

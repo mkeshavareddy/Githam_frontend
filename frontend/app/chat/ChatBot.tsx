@@ -130,26 +130,11 @@ export function ChatBot({ showDebugPanel, simulateFailure, onUpdateChatHistory, 
       // Apply mode-specific prompting
       const promptedContent = applyModePrompting(content, thinkingMode, isCloudModel)
       
-      // Use direct API calls for cloud models, backend API for Ollama models
-      let response: QueryResponse
-      if (currentModel?.category === 'cloud') {
-        console.log('Using direct cloud API for:', selectedModel)
-        const directResponse = await queryModelDirect(promptedContent, selectedModel)
-        response = {
-          answer: directResponse.answer,
-          citations: [], // Cloud models don't have citations in this implementation
-          processing_trace: {
-            language: 'en',
-            retrieval: { dense: [], sparse: [] },
-            kg_traversal: 'Direct cloud API call',
-            controller_iterations: 1
-          },
-          risk_assessment: 'N/A'
-        }
-      } else {
-        console.log('Using backend API for:', selectedModel)
-        response = await queryAPI(promptedContent, simulateFailure, selectedModel, thinkingMode)
-      }
+      // Always use backend API for policy queries
+      // The backend handles RAG retrieval and answer synthesis using Vertex AI
+      // The selected model is passed as context but the backend uses its configured model
+      console.log('Using backend policy API for query with model context:', selectedModel)
+      const response = await queryAPI(promptedContent, simulateFailure, selectedModel, thinkingMode)
       
       // Fallback if response.answer is empty or undefined
       const responseContent = response.answer || `I received your message "${content}" but couldn't generate a proper response. This might be due to API configuration issues.`
