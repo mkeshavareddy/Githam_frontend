@@ -346,7 +346,7 @@ export default function WebScraperPage() {
                   </Badge>
                 </CardTitle>
                 <div className="flex items-center gap-2">
-                  {currentData.processing_time > 0 && (
+                  {currentData.processing_time && currentData.processing_time > 0 && (
                     <span className="text-sm text-muted-foreground">
                       {currentData.processing_time.toFixed(2)}s
                     </span>
@@ -504,7 +504,7 @@ export default function WebScraperPage() {
                         </div>
                         <div className="text-sm text-muted-foreground">{data.url}</div>
                         <div className="text-xs text-muted-foreground">
-                          {data.pdfs?.length || 0} PDFs • {data.links.length} links • {data.processing_time.toFixed(2)}s
+                          {data.pdfs?.length || 0} PDFs • {data.links.length} links • {data.processing_time?.toFixed(2) || 0}s
                         </div>
                       </div>
                     </div>

@@ -102,45 +102,45 @@ export function DebugPanel({ lastResponse }: DebugPanelProps) {
                   <div className="flex items-center gap-2 text-sm">
                     <span className="font-mono text-xs bg-muted px-2 py-1 rounded">1</span>
                     <span>Language Detection</span>
-                    {getStatusIcon(lastResponse.processing_trace.language)}
-                    <span className={getStatusText(lastResponse.processing_trace.language)}>
-                      {lastResponse.processing_trace.language}
+                    {getStatusIcon(lastResponse.processing_trace?.language)}
+                    <span className={getStatusText(lastResponse.processing_trace?.language)}>
+                      {lastResponse.processing_trace?.language || 'N/A'}
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center gap-2 text-sm">
                     <span className="font-mono text-xs bg-muted px-2 py-1 rounded">2</span>
                     <span>Dense Retrieval</span>
-                    {getStatusIcon(lastResponse.processing_trace.retrieval.dense)}
-                    <span className={getStatusText(lastResponse.processing_trace.retrieval.dense)}>
-                      {lastResponse.processing_trace.retrieval.dense.length} candidates
+                    {getStatusIcon(lastResponse.processing_trace?.retrieval?.dense)}
+                    <span className={getStatusText(lastResponse.processing_trace?.retrieval?.dense)}>
+                      {lastResponse.processing_trace?.retrieval?.dense?.length || 0} candidates
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center gap-2 text-sm">
                     <span className="font-mono text-xs bg-muted px-2 py-1 rounded">3</span>
                     <span>Sparse Retrieval</span>
-                    {getStatusIcon(lastResponse.processing_trace.retrieval.sparse)}
-                    <span className={getStatusText(lastResponse.processing_trace.retrieval.sparse)}>
-                      {lastResponse.processing_trace.retrieval.sparse.length} candidates
+                    {getStatusIcon(lastResponse.processing_trace?.retrieval?.sparse)}
+                    <span className={getStatusText(lastResponse.processing_trace?.retrieval?.sparse)}>
+                      {lastResponse.processing_trace?.retrieval?.sparse?.length || 0} candidates
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center gap-2 text-sm">
                     <span className="font-mono text-xs bg-muted px-2 py-1 rounded">4</span>
                     <span>Knowledge Graph Traversal</span>
-                    {getStatusIcon(lastResponse.processing_trace.kg_traversal)}
-                    <span className={getStatusText(lastResponse.processing_trace.kg_traversal)}>
-                      {lastResponse.processing_trace.kg_traversal}
+                    {getStatusIcon(lastResponse.processing_trace?.kg_traversal)}
+                    <span className={getStatusText(lastResponse.processing_trace?.kg_traversal)}>
+                      {lastResponse.processing_trace?.kg_traversal || 'N/A'}
                     </span>
                   </div>
-                  
+
                   <div className="flex items-center gap-2 text-sm">
                     <span className="font-mono text-xs bg-muted px-2 py-1 rounded">5</span>
                     <span>LLM Controller Iterations</span>
-                    {getStatusIcon(lastResponse.processing_trace.controller_iterations)}
-                    <span className={getStatusText(lastResponse.processing_trace.controller_iterations)}>
-                      {lastResponse.processing_trace.controller_iterations} iterations
+                    {getStatusIcon(lastResponse.processing_trace?.controller_iterations)}
+                    <span className={getStatusText(lastResponse.processing_trace?.controller_iterations)}>
+                      {lastResponse.processing_trace?.controller_iterations || 0} iterations
                     </span>
                   </div>
                 </div>
@@ -149,7 +149,7 @@ export function DebugPanel({ lastResponse }: DebugPanelProps) {
               {/* Citations */}
               <div>
                 <h3 className="font-semibold mb-3">Citations</h3>
-                {lastResponse.citations.length === 0 ? (
+                {!lastResponse.citations || lastResponse.citations.length === 0 ? (
                   <p className="text-sm text-muted-foreground">No citations available</p>
                 ) : (
                   <div className="space-y-2">
@@ -171,7 +171,7 @@ export function DebugPanel({ lastResponse }: DebugPanelProps) {
                 <div className="flex items-center gap-2">
                   {getStatusIcon(lastResponse.risk_assessment)}
                   <span className={getStatusText(lastResponse.risk_assessment)}>
-                    {lastResponse.risk_assessment}
+                    {lastResponse.risk_assessment || 'N/A'}
                   </span>
                 </div>
               </div>
