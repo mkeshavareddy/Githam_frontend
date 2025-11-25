@@ -8,7 +8,7 @@ WORKDIR /app
 
 # Copy package files from frontend directory
 COPY frontend/package.json frontend/package-lock.json* ./
-RUN npm ci --only=production
+RUN npm ci
 
 # Stage 2: Build the application
 FROM node:20-alpine AS builder
