@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { useTheme } from '@/lib/theme-context'
 
 export function ThemeToggle() {
-  const { theme, setTheme, actualTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
 
   const getIcon = () => {
     switch (theme) {

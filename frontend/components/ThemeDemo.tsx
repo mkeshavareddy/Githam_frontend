@@ -3,12 +3,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { useTheme, useThemeClasses } from '@/lib/theme-context'
+import { useTheme } from '@/lib/theme-context'
 import { Sun, Moon, Monitor, Palette, Sparkles } from 'lucide-react'
 
 export function ThemeDemo() {
-  const { theme, actualTheme } = useTheme()
-  const themeClasses = useThemeClasses()
+  const { theme } = useTheme()
 
   return (
     <div className="space-y-6 p-6">
@@ -21,10 +20,6 @@ export function ThemeDemo() {
           <Badge variant="outline" className="flex items-center gap-1">
             <Palette className="h-3 w-3" />
             Current: {theme}
-          </Badge>
-          <Badge variant="outline" className="flex items-center gap-1">
-            <Sparkles className="h-3 w-3" />
-            Actual: {actualTheme}
           </Badge>
         </div>
       </div>
@@ -116,14 +111,14 @@ export function ThemeDemo() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className={`p-4 rounded ${themeClasses.card}`}>
+            <div className="p-4 rounded bg-card border">
               <p className="text-sm">Card styling with theme classes</p>
             </div>
             <div className="flex gap-2">
-              <Button className={themeClasses.buttonPrimary}>
+              <Button>
                 Primary Button
               </Button>
-              <Button variant="outline" className={themeClasses.buttonSecondary}>
+              <Button variant="outline">
                 Secondary Button
               </Button>
             </div>
