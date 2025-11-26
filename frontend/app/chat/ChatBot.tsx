@@ -5,7 +5,8 @@ import { ChatMessage } from '@/components/ChatMessage'
 import { ChatInput } from '@/components/ChatInput'
 import { TypingIndicator } from '@/components/TypingIndicator'
 import { DebugPanel } from './DebugPanel'
-import { queryAPI, queryModelDirect, type QueryResponse } from '@/lib/api'
+import { queryDiscoveryEngine, convertToQueryResponse } from '@/lib/discovery-engine-api'
+import { type QueryResponse } from '@/lib/api'
 import { modelService } from '@/lib/modelService'
 import { AIModel } from '@/lib/models'
 import { Badge } from '@/components/ui/badge'
@@ -130,11 +131,11 @@ export function ChatBot({ showDebugPanel, simulateFailure, onUpdateChatHistory, 
       // Apply mode-specific prompting
       const promptedContent = applyModePrompting(content, thinkingMode, isCloudModel)
       
-      // Always use backend API for policy queries
-      // The backend handles RAG retrieval and answer synthesis using Vertex AI
-      // The selected model is passed as context but the backend uses its configured model
-      console.log('Using backend policy API for query with model context:', selectedModel)
-      const response = await queryAPI(promptedContent, simulateFailure, selectedModel, thinkingMode)
+      // Always use Discovery Engine API for policy queries
+      // Discovery Engine handles search and AI answer generation
+      console.log('Using Discovery Engine API for query:', promptedContent)
+      const discoveryResponse = await queryDiscoveryEngine(promptedContent, 10)
+      const response = convertToQueryResponse(discoveryResponse)
       
       // Fallback if response.answer is empty or undefined
       const responseContent = response.answer || `I received your message "${content}" but couldn't generate a proper response. This might be due to API configuration issues.`
